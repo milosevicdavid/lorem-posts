@@ -1,28 +1,71 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="container">
+    <v-select
+      class="style-chooser"
+      v-model="query"
+      label="title"
+      :clearable="false"
+      :options="options"
+      placeholder="Please start entering text to search"
+    >
+    </v-select>
+    <div>
+      {{ query.title }} <br />
+      {{ query.body }}
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      query: "",
+      options: [],
+    };
+  },
+
+  mounted: function() {
+    return axios
+      .get("https://jsonplaceholder.typicode.com/posts?q=lorem")
+      .then((res) => {
+        this.options = res.data;
+      });
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+.style-chooser {
+  .vs__search::placeholder,
+  .vs__dropdown-toggle {
+    color: #394066;
+    font-size: 14px;
+    height: 44px;
+    border-radius: 8px;
+  }
+
+  .vs__dropdown-menu {
+    background-color: #6fce96;
+    border-radius: 0 0 20px 20px;
+  }
+
+  li:hover {
+    background-color: #69c28e;
+    color: white;
+  }
+
+  li {
+    background-color: #6fce96;
+    color: white;
+    text-transform: capitalize;
+  }
+
+  .vs__clear,
+  .vs__open-indicator {
+    fill: #394066;
+  }
 }
 </style>
