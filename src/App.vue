@@ -92,7 +92,7 @@ body {
 }
 
 .wrapper {
-  width: 60vw;
+  width: 65vw;
 }
 
 .post-holder {
