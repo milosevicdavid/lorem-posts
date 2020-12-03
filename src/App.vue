@@ -132,6 +132,8 @@ body {
   font-size: 11px;
   display: block;
   color: #299553;
+  font-weight: 600;
+  border-bottom: 1px solid #69c28e;
 }
 
 .no-search {
@@ -139,8 +141,4 @@ body {
 }
 
 
-.subtitle {
-  font-weight: 600;
-  border-bottom: 1px solid #69c28e;
-}
 </style>
