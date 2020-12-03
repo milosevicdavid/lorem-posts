@@ -1,24 +1,21 @@
-
 <template>
-<div v-if="query" class="card">
-        <div class="card-wrapper">
-          <span class="card-title"
-            ><h1>{{ query.title }}</h1></span
-          >
-          <span class="card-body">{{ `${query.body}.` }}</span>
-        </div>
-      </div>
-      <div class="post-holder" v-else>
-        ... your selected post will display here
-      </div>
+  <div v-if="query" class="card">
+    <div class="card-wrapper">
+      <span class="card-title"
+        ><h1>{{ query.title }}</h1></span
+      >
+      <span class="card-body">{{ `${query.body}.` }}</span>
+    </div>
+  </div>
+  <div class="post-holder" v-else>
+    ... your selected post will display here
+  </div>
 </template>
 
 <script>
 export default {
-
-  props: ['query']
-}
-
+  props: ["query"],
+};
 </script>
 
 <style lang="scss">
@@ -29,7 +26,6 @@ export default {
   font-size: 24px;
 }
 
-
 .card {
   display: flex;
   justify-content: center;
@@ -38,6 +34,10 @@ export default {
   &-wrapper {
     width: 50vw;
     margin-top: 50px;
+
+    @media (max-width: 576px) {
+      width: 80vw;
+    }
   }
 
   &-title {
@@ -63,5 +63,4 @@ export default {
     }
   }
 }
-
 </style>

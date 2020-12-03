@@ -1,8 +1,7 @@
 <template>
   <div class="container">
     <div class="wrapper">
-
-<v-select
+      <v-select
         class="style-chooser"
         v-model="query"
         label="title"
@@ -29,18 +28,15 @@
           </template>
         </template>
       </v-select>
-      
-<Card :query="query" />      
 
+      <Card :query="query" />
     </div>
   </div>
 </template>
 
-
-
 <script>
 import axios from "axios";
-import Card from "./components/Card.vue"
+import Card from "./components/Card.vue";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
@@ -51,13 +47,11 @@ export default {
     };
   },
 
-
   components: {
     Card,
-    PulseLoader
+    PulseLoader,
   },
 
- 
   mounted: function() {
     return axios
       .get("https://jsonplaceholder.typicode.com/posts?q=lorem")
@@ -67,8 +61,6 @@ export default {
   },
 };
 </script>
-
-
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
@@ -88,6 +80,10 @@ body {
 
 .wrapper {
   width: 65vw;
+
+  @media (max-width: 576px) {
+    width: 90vw;
+  }
 }
 
 .style-chooser {
@@ -108,23 +104,28 @@ body {
     border-radius: 0 0 20px 20px;
   }
 
-  
   li {
     background-color: #6fce96;
     color: white;
     text-transform: capitalize;
 
+   
     &:hover {
-    background-color: #69c28e;
-    color: white;
-  }
-
+      background-color: #69c28e;
+      color: white;
+    }
   }
 
   .vs__clear,
   .vs__open-indicator {
     fill: #394066;
   }
+}
+
+.title {
+  font-weight: 600;
+  margin-top: 10px;
+
 }
 
 .subtitle {
@@ -137,15 +138,9 @@ body {
   color: #fff;
 }
 
-.title {
-  font-weight: 600;
-  margin-top: 10px;
-}
 
 .subtitle {
   font-weight: 600;
   border-bottom: 1px solid #69c28e;
 }
-
-
 </style>
