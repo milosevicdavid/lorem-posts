@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="wrapper">
+
       <v-select
         class="style-chooser"
         v-model="query"
@@ -19,27 +20,36 @@
         </template>
         <template v-slot:no-options="{ search, searching }">
           <template v-if="searching">
+            <PulseLoader />
+          </template>
+          <template v-if="searching">
             <span class="no-search">
               Sorry, we couldn't find anything :(
             </span>
           </template>
         </template>
       </v-select>
-      <div v-if="query" class="card-wrapper">
-        <div class="card">
+
+      <div v-if="query" class="card">
+        <div class="card-wrapper">
           <span class="card-title"
             ><h1>{{ query.title }}</h1></span
           >
           <span class="card-body">{{ `${query.body}.` }}</span>
-        </div>   
+        </div>
       </div>
-      <div class="post-holder" v-else>... your selected post will display here</div>
+      <div class="post-holder" v-else>
+        ... your selected post will display here
+      </div>
     </div>
   </div>
 </template>
 
+
+
 <script>
 import axios from "axios";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
   data() {
@@ -47,6 +57,10 @@ export default {
       query: "",
       options: [],
     };
+  },
+
+  components: {
+    PulseLoader,
   },
 
   mounted: function() {
@@ -59,11 +73,14 @@ export default {
 };
 </script>
 
+
+
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
 body {
   background-color: rgb(171, 251, 146, 0.4);
-
+  font-family: "Varela Round", sans-serif;
 }
 
 .container {
@@ -78,7 +95,7 @@ body {
   width: 60vw;
 }
 
-.post-holder{
+.post-holder {
   color: #69c28e;
   text-align: center;
   margin-top: 100px;
@@ -86,7 +103,6 @@ body {
 }
 
 .style-chooser {
-  
   .vs__dropdown-toggle {
     color: #394066;
     font-size: 14px;
@@ -96,6 +112,7 @@ body {
 
   .vs__search::placeholder {
     opacity: 0.5;
+    content: "";
   }
 
   .vs__dropdown-menu {
@@ -103,15 +120,17 @@ body {
     border-radius: 0 0 20px 20px;
   }
 
-  li:hover {
-    background-color: #69c28e;
-    color: white;
-  }
-
+  
   li {
     background-color: #6fce96;
     color: white;
     text-transform: capitalize;
+
+    &:hover {
+    background-color: #69c28e;
+    color: white;
+  }
+
   }
 
   .vs__clear,
@@ -127,7 +146,7 @@ body {
 }
 
 .no-search {
-  color: #dedede;
+  color: #fff;
 }
 
 .title {
@@ -140,15 +159,15 @@ body {
   border-bottom: 1px solid #69c28e;
 }
 
-.card-wrapper {
+.card {
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.card {
-  width: 50vw;
-  margin-top: 50px;
+  &-wrapper {
+    width: 50vw;
+    margin-top: 50px;
+  }
 
   &-title {
     display: block;
